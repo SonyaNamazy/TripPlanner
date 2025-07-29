@@ -1,68 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C6F7D7"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:background="#C6F7D7"
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/abhayalibreextrabold"
+        android:textColor="#56C88D"
+        android:text="Enjoy your trip"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"/>
+
+    <ImageView
+        android:id="@+id/imageMain"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:src="@drawable/travel_image"
+        android:contentDescription="Travel Image"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="24dp">
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/abhayalibreextrabold"
+        android:textSize="20sp"
+        android:text="Sign Up"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#56C88D"
+        android:layout_marginBottom="9dp" />
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/tvWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/abhayalibreextrabold"
-            android:textColor="#56C88D"
-            android:text="Enjoy your trip"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="32dp"/>
-        <!-- Image -->
-        <ImageView
-            android:id="@+id/imageMain"
-            android:layout_width="wrap_content"
-            android:layout_height="250dp"
-            android:src="@drawable/travel_image"
-            android:contentDescription="Travel Image"
-            android:layout_marginBottom="32dp"/>
-
-        <!-- Sign Up Button -->
-        <Button
-            android:id="@+id/btnSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/abhayalibreextrabold"
-            android:textSize="20sp"
-            android:text="Sign Up"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#56C88D"
-            android:layout_marginBottom="9dp" />
-
-        <!-- Sign In Button -->
-        <Button
-            android:id="@+id/btnSignIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/abhayalibreextrabold"
-            android:textSize="20sp"
-            android:text="Sign In"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#56C88D"
-            android:layout_marginBottom="40dp"/>
-
-
-
-    </LinearLayout>
-
-
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/abhayalibreextrabold"
+        android:textSize="20sp"
+        android:text="Sign In"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#56C88D"
+        android:layout_marginBottom="40dp"/>
 </LinearLayout>
