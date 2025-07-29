@@ -12,7 +12,6 @@
     android:padding="24dp"
     tools:context=".MainActivity">
 
-
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
@@ -40,6 +39,7 @@
         android:textSize="20sp"
         android:text="Sign Up"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:backgroundTint="#56C88D"
         android:layout_marginBottom="9dp" />
 
@@ -51,6 +51,7 @@
         android:textSize="20sp"
         android:text="Sign In"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:backgroundTint="#56C88D"
         android:layout_marginBottom="40dp"/>
 </LinearLayout>
