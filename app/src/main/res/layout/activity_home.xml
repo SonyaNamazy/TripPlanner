@@ -1,0 +1,94 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C6F7D7"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="WELCOM!"
+        android:fontFamily="@font/abhayalibreextrabold"
+        android:textColor="#56C88D"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+        app:layout_constraintBottom_toTopOf="@id/imgHome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnAddTrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Trip"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:backgroundTint="#8056C88D"
+            android:textColor="#FFF"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnTripList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trip List"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:backgroundTint="#8056C88D"
+            android:textColor="#FFF"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnTripReminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trip Reminder"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:backgroundTint="#8056C88D"
+            android:textColor="#FFF"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnExit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Exit"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:backgroundTint="#8056C88D"
+            android:textColor="#FFF" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgHome"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:src="@drawable/home_image"
+        android:contentDescription="Home Image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
