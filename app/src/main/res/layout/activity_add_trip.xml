@@ -1,0 +1,164 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="#C6F7D7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/etDestination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:hint="Destination"
+            android:textColor="#000000"
+            android:textColorHint="#BFFFFFFF"
+            android:background="@drawable/edit_text_bg"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etDepartureDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:hint="Departure Date"
+            android:textColor="#000000"
+            android:textColorHint="#BFFFFFFF"
+            android:focusable="false"
+            android:background="@drawable/edit_text_bg"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etReturnDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:hint="Return Date"
+            android:textColor="#000000"
+            android:textColorHint="#BFFFFFFF"
+            android:focusable="false"
+            android:background="@drawable/edit_text_bg"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etCompanions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Travel Companions"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:textColor="#000000"
+            android:textColorHint="#BFFFFFFF"
+            android:background="@drawable/edit_text_bg"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etTripType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Trip Type"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:textColor="#000000"
+            android:textColorHint="#BFFFFFFF"
+            android:background="@drawable/edit_text_bg"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etBudget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:hint="Estimated Budget"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textColorHint="#BFFFFFFF"
+            android:background="@drawable/edit_text_bg"
+            android:padding="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/etPackingItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Packing List"
+                android:fontFamily="@font/abhayalibreextrabold"
+                android:textColor="#000000"
+                android:textColorHint="#BFFFFFFF"
+                android:background="@drawable/edit_text_bg"
+                android:padding="12dp"
+                android:layout_marginEnd="12dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAddPacking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_input_add"
+                android:contentDescription="Add item"
+                android:backgroundTint="#56C88D"
+                android:elevation="6dp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkboxReminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Would you like to receive a reminder one day before your trip?"
+            android:fontFamily="@font/abhayalibreextrabold"
+            android:textColor="#050505"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:backgroundTint="#56C88D"
+                android:textColor="#FFF"
+                android:fontFamily="@font/abhayalibreextrabold"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#56C88D"
+                android:textColor="#FFF"
+                android:fontFamily="@font/abhayalibreextrabold"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
