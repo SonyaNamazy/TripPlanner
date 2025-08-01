@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/title_bg"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="16dp">
+
+    <TextView
+        android:id="@+id/tvDestination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shiraz"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/abhayalibreextrabold"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/tvTripInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(4 days / with Sara / Trip Type: Leisure / Budget: $200)"
+        android:textSize="13sp"
+        android:textColor="#99333333"
+        android:fontFamily="@font/andikanewbasici"
+        android:layout_marginTop="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Camera"
+                android:fontFamily="@font/andikanewbasici"
+                android:textColor="#99333333"
+                android:textSize="13sp"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Toiletries"
+                android:fontFamily="@font/andikanewbasici"
+                android:textColor="#99333333"
+                android:textSize="13sp"
+                android:checked="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="8dp">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Charger"
+                android:fontFamily="@font/andikanewbasici"
+                android:textColor="#99333333"
+                android:textSize="13sp"
+                android:checked="true" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sunglasses"
+                android:fontFamily="@font/andikanewbasici"
+                android:textColor="#99333333"
+                android:textSize="13sp"
+                android:checked="false" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btnMoreDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="more details..."
+        android:textColor="#99333333"
+        android:layout_marginTop="1dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit"
+            android:backgroundTint="#C6F7D7"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:fontFamily="@font/abhayalibreextrabold" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Delete"
+            android:backgroundTint="#C6F7D7"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:fontFamily="@font/abhayalibreextrabold" />
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+

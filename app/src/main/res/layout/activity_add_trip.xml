@@ -110,7 +110,7 @@
                 android:id="@+id/btnAddPacking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_input_add"
+                android:src="@drawable/ic_add_white"
                 android:contentDescription="Add item"
                 android:backgroundTint="#56C88D"
                 android:elevation="6dp" />

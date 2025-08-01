@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutTripList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#C6F7D7">
+
+    <TextView
+        android:id="@+id/tvTripListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trip List"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:background="#E9FFE3"
+        android:gravity="center"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/abhayalibreextrabold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTripList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>
