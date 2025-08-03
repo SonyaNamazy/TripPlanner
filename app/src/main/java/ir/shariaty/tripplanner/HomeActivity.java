@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
         btnAddTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, AddTrip.class);
+                Intent intent = new Intent(HomeActivity.this, AddTripActivity.class);
                 startActivity(intent);
             }
         });
