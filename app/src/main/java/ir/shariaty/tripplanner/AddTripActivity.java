@@ -1,7 +1,6 @@
 package ir.shariaty.tripplanner;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,9 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddTripActivity extends AppCompatActivity {
 
@@ -27,14 +29,14 @@ public class AddTripActivity extends AppCompatActivity {
     Button btnSave, btnCancel;
 
     ArrayList<String> packingList = new ArrayList<>();
-    UserDatabaseHelper dbHelper;
+    FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_trip);
 
-        dbHelper = new UserDatabaseHelper(this);
+        firestore = FirebaseFirestore.getInstance();
 
         etDestination = findViewById(R.id.etDestination);
         etDepartureDate = findViewById(R.id.etDepartureDate);
@@ -49,7 +51,6 @@ public class AddTripActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
 
         etDepartureDate.setOnClickListener(v -> showDatePickerDialog(etDepartureDate));
-
         etReturnDate.setOnClickListener(v -> showDatePickerDialog(etReturnDate));
 
         btnAddPacking.setOnClickListener(v -> {
@@ -64,10 +65,7 @@ public class AddTripActivity extends AppCompatActivity {
         });
 
         btnSave.setOnClickListener(v -> saveTrip());
-
-        btnCancel.setOnClickListener(v -> {
-            finish(); // یا startActivity(new Intent(this, HomeActivity.class));
-        });
+        btnCancel.setOnClickListener(v -> finish());
     }
 
     private void showDatePickerDialog(final EditText targetEditText) {
@@ -98,18 +96,28 @@ public class AddTripActivity extends AppCompatActivity {
         }
 
         String packingListString = TextUtils.join(", ", packingList);
-
         boolean reminder = checkboxReminder.isChecked();
 
-        boolean inserted = dbHelper.insertTrip(destination, departureDate, returnDate,
-                companions, tripType, budget, packingListString, reminder);
+        Map<String, Object> trip = new HashMap<>();
+        trip.put("destination", destination);
+        trip.put("departureDate", departureDate);
+        trip.put("returnDate", returnDate);
+        trip.put("companions", companions);
+        trip.put("tripType", tripType);
+        trip.put("budget", budget);
+        trip.put("packingList", packingListString);
+        trip.put("reminder", reminder);
 
-        if (inserted) {
-            Toast.makeText(this, "سفر شما ذخیره شد", Toast.LENGTH_SHORT).show();
-            finish();
-        } else {
-            Toast.makeText(this, "خطا در ذخیره سفر", Toast.LENGTH_SHORT).show();
-        }
+        firestore.collection("trips")
+                .add(trip)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Trip saved successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error saving trip: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                });
     }
 }
+
 

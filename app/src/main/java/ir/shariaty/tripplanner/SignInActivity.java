@@ -8,11 +8,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class SignInActivity extends AppCompatActivity {
 
-    EditText etEmail, etPassword;
-    Button btnSignIn;
-    UserDatabaseHelper dbHelper;
+    private EditText etEmail, etPassword;
+    private Button btnSignIn;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +27,7 @@ public class SignInActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
 
-        dbHelper = new UserDatabaseHelper(this);
+        mAuth = FirebaseAuth.getInstance();
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,19 +37,23 @@ public class SignInActivity extends AppCompatActivity {
 
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(SignInActivity.this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show();
-                } else {
-                    boolean isValid = dbHelper.checkUser(email, password);
-                    if (isValid) {
-                        Toast.makeText(SignInActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(SignInActivity.this, "No account found. Please sign up.", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
-                        startActivity(intent);
-                    }
+                    return;
                 }
+
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(SignInActivity.this, task -> {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Toast.makeText(SignInActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(SignInActivity.this, "No account found. Please sign up.", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                                startActivity(intent);
+                            }
+                        });
             }
         });
     }

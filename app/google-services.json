@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "117724910892",
+    "project_id": "tripplanner-1e5bb",
+    "storage_bucket": "tripplanner-1e5bb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117724910892:android:ec82e3b2bfcb4550f3c889",
+        "android_client_info": {
+          "package_name": "ir.shariaty.tripplanner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1ackVQhzHJSQ4EsM_0HmLwv61EWDadJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
