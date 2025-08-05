@@ -3,10 +3,8 @@ package ir.shariaty.tripplanner;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,9 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,8 +26,9 @@ public class AddTripActivity extends AppCompatActivity {
     FloatingActionButton btnAddPacking;
     Button btnSave, btnCancel;
 
-    ArrayList<String> packingList = new ArrayList<>();
+    Map<String, Boolean> packingList = new HashMap<>();
     FirebaseFirestore firestore;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +36,7 @@ public class AddTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_trip);
 
         firestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         etDestination = findViewById(R.id.etDestination);
         etDepartureDate = findViewById(R.id.etDepartureDate);
@@ -56,7 +56,7 @@ public class AddTripActivity extends AppCompatActivity {
         btnAddPacking.setOnClickListener(v -> {
             String item = etPackingItem.getText().toString().trim();
             if (!item.isEmpty()) {
-                packingList.add(item);
+                packingList.put(item, false);
                 etPackingItem.setText("");
                 Toast.makeText(this, "Item added to packing list", Toast.LENGTH_SHORT).show();
             } else {
@@ -95,7 +95,6 @@ public class AddTripActivity extends AppCompatActivity {
             return;
         }
 
-        String packingListString = TextUtils.join(", ", packingList);
         boolean reminder = checkboxReminder.isChecked();
 
         Map<String, Object> trip = new HashMap<>();
@@ -105,7 +104,7 @@ public class AddTripActivity extends AppCompatActivity {
         trip.put("companions", companions);
         trip.put("tripType", tripType);
         trip.put("budget", budget);
-        trip.put("packingList", packingListString);
+        trip.put("packingList", new HashMap<>(packingList));
         trip.put("reminder", reminder);
 
         firestore.collection("trips")
@@ -118,6 +117,9 @@ public class AddTripActivity extends AppCompatActivity {
                     Toast.makeText(this, "Error saving trip: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }
+
+
 }
+
 
 
