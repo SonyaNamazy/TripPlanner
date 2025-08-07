@@ -76,7 +76,7 @@ public class AddTripActivity extends AppCompatActivity {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, year1, month1, dayOfMonth) -> {
-                    String dateStr = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
+                    String dateStr = year1 + "/" + (month1 + 1) + "/" + dayOfMonth;
                     targetEditText.setText(dateStr);
                 }, year, month, day);
         datePickerDialog.show();

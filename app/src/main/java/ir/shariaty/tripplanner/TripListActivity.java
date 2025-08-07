@@ -60,7 +60,6 @@ public class TripListActivity extends AppCompatActivity {
                 if (trip != null) {
                     trip.setId(document.getId());
 
-                    // اصلاح نوع packingList
                     Object packingObj = document.get("packingList");
                     if (packingObj instanceof Map) {
                         try {
