@@ -4,17 +4,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,46 +41,47 @@ public class TripListActivity extends AppCompatActivity {
 
         loadTripsFromFirebase();
     }
+
     private void loadTripsFromFirebase() {
-        CollectionReference tripsRef = firestore.collection("trips");
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        tripsRef.addSnapshotListener((snapshots, e) -> {
-            if (e != null) {
-                return;
-            }
+        firestore.collection("trips")
+                .whereEqualTo("userId", currentUserId)
+                .addSnapshotListener((snapshots, e) -> {
+                    if (e != null || snapshots == null) return;
 
-            tripList.clear();
+                    tripList.clear();
 
-            for (DocumentSnapshot document : snapshots.getDocuments()) {
-                Trip trip = document.toObject(Trip.class);
-                if (trip != null) {
-                    trip.setId(document.getId());
+                    for (DocumentSnapshot document : snapshots.getDocuments()) {
+                        Trip trip = document.toObject(Trip.class);
+                        if (trip != null) {
+                            trip.setId(document.getId());
 
-                    Object packingObj = document.get("packingList");
-                    if (packingObj instanceof Map) {
-                        try {
-                            Map<String, Boolean> packingMap = (Map<String, Boolean>) packingObj;
-                            trip.setPackingList(packingMap);
-                        } catch (Exception ex) {
-                            trip.setPackingList(null);
+                            Object packingObj = document.get("packingList");
+                            if (packingObj instanceof Map) {
+                                try {
+                                    Map<String, Boolean> packingMap = (Map<String, Boolean>) packingObj;
+                                    trip.setPackingList(packingMap);
+                                } catch (Exception ex) {
+                                    trip.setPackingList(null);
+                                }
+                            } else {
+                                trip.setPackingList(null);
+                            }
+
+                            tripList.add(trip);
                         }
-                    } else {
-                        trip.setPackingList(null);
                     }
 
-                    tripList.add(trip);
-                }
-            }
+                    if (tripList.isEmpty()) {
+                        tvEmptyMessage.setVisibility(View.VISIBLE);
+                    } else {
+                        tvEmptyMessage.setVisibility(View.GONE);
+                    }
 
-            if (tripList.isEmpty()) {
-                tvEmptyMessage.setVisibility(View.VISIBLE);
-            } else {
-                tvEmptyMessage.setVisibility(View.GONE);
-            }
-
-            tripAdapter.updateList(tripList);
-        });
+                    tripAdapter.updateList(tripList);
+                });
     }
-
 }
+
 

@@ -96,6 +96,7 @@ public class AddTripActivity extends AppCompatActivity {
         }
 
         boolean reminder = checkboxReminder.isChecked();
+        String userId = mAuth.getCurrentUser().getUid();
 
         Map<String, Object> trip = new HashMap<>();
         trip.put("destination", destination);
@@ -106,6 +107,7 @@ public class AddTripActivity extends AppCompatActivity {
         trip.put("budget", budget);
         trip.put("packingList", new HashMap<>(packingList));
         trip.put("reminder", reminder);
+        trip.put("userId", userId);
 
         firestore.collection("trips")
                 .add(trip)
@@ -117,9 +119,8 @@ public class AddTripActivity extends AppCompatActivity {
                     Toast.makeText(this, "Error saving trip: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }
-
-
 }
+
 
 
 
