@@ -31,6 +31,7 @@
         <activity
             android:name=".TripListActivity"
             android:exported="false" />
+        <activity android:name=".TripReminderActivity" />
         <receiver android:name=".ReminderReceiver" />
 
         <activity
