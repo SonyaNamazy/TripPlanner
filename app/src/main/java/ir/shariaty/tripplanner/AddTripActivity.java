@@ -1,8 +1,12 @@
 package ir.shariaty.tripplanner;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.provider.Settings;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,6 +25,8 @@ import java.util.Map;
 
 public class AddTripActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_SCHEDULE_EXACT_ALARM = 123;
+
     EditText etDestination, etDepartureDate, etReturnDate, etCompanions, etTripType, etBudget, etPackingItem;
     CheckBox checkboxReminder;
     FloatingActionButton btnAddPacking;
@@ -29,6 +35,9 @@ public class AddTripActivity extends AppCompatActivity {
     Map<String, Boolean> packingList = new HashMap<>();
     FirebaseFirestore firestore;
     FirebaseAuth mAuth;
+
+    private String reminderDestination;
+    private long reminderTriggerTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,13 +122,70 @@ public class AddTripActivity extends AppCompatActivity {
                 .add(trip)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Trip saved successfully", Toast.LENGTH_SHORT).show();
+
+                    if (reminder) {
+                        long triggerTime = System.currentTimeMillis() + 10 * 1000;
+                        reminderDestination = destination;
+                        reminderTriggerTime = triggerTime;
+                        checkExactAlarmPermissionAndSchedule(destination, triggerTime);
+                    }
+
                     finish();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Error saving trip: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }
+
+    private void checkExactAlarmPermissionAndSchedule(String destination, long triggerTime) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            if (!alarmManager.canScheduleExactAlarms()) {
+                Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                startActivityForResult(intent, REQUEST_CODE_SCHEDULE_EXACT_ALARM);
+                return;
+            }
+        }
+        scheduleNotification(destination, triggerTime);
+    }
+
+    private void scheduleNotification(String destination, long triggerTime) {
+        Intent intent = new Intent(this, ReminderReceiver.class);
+        intent.putExtra("destination", destination);
+
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            flags |= PendingIntent.FLAG_MUTABLE;
+        }
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, flags);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SCHEDULE_EXACT_ALARM) {
+            if (reminderDestination != null && reminderTriggerTime != 0) {
+                checkExactAlarmPermissionAndSchedule(reminderDestination, reminderTriggerTime);
+                reminderDestination = null;
+                reminderTriggerTime = 0;
+            }
+        }
+    }
 }
+
+
+
+
+
+
+
+
 
 
 
