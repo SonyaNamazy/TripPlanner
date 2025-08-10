@@ -48,10 +48,11 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.TripViewHolder
         Trip trip = tripList.get(position);
         holder.tvDestination.setText(trip.getDestination());
 
-        int days = calculateDays(trip.getDepartureDate(), trip.getReturnDate());
-        String info = "(" + days + " days / with " + trip.getCompanions()
-                + " / Trip Type: " + trip.getTripType()
-                + " / Budget: " + trip.getBudget() + ")";
+        String info = "(From: " + trip.getDepartureDate()
+                + " To: " + trip.getReturnDate()
+                + " | with " + trip.getCompanions()
+                + " | Trip Type: " + trip.getTripType()
+                + " | Budget: " + trip.getBudget() + ")";
         holder.tvTripInfo.setText(info);
 
         holder.checkBoxContainer1.removeAllViews();
@@ -144,6 +145,8 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.TripViewHolder
             context.startActivity(intent);
         });
     }
+
+
 
     private int calculateDays(String start, String end) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());

@@ -24,7 +24,7 @@
         android:id="@+id/tvTripInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(4 days / with Sara / Trip Type: Leisure / Budget: $200)"
+        android:text="(From: 2025/8/10 To: 2025/8/14 | with Sara | Trip Type: Leisure | Budget: $200)"
         android:textSize="13sp"
         android:textColor="#99333333"
         android:fontFamily="@font/andikanewbasici"
